@@ -1,7 +1,6 @@
-export interface InputProps {
-  label: string;
-  register: any;
+import { TextFieldProps } from "@mui/material";
+
+export interface InputProps extends Omit<TextFieldProps, "name"> {
   name: string;
-  type?: string;
-  error?: string;
+  register: any;
 }

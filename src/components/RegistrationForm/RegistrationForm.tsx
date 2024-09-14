@@ -6,6 +6,7 @@ import { useForm } from "../../hooks/useForm";
 import { registrationSchema } from "../../validation/registrationSchema";
 import { RegistrationFormData } from "../../interfaces/registrationInterfaces";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { Button, Stack } from "@mui/material";
 
 const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
   const { register, handleSubmit, errors } = useForm<RegistrationFormData>({
@@ -15,34 +16,42 @@ const RegistrationForm: React.FC<RegistrationFormProps> = ({ onSubmit }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <Input
-        label="ユーザー名"
-        name="username"
-        register={register}
-        error={errors.username?.message}
-      />
-      <Input
-        label="パスワード"
-        name="password"
-        type="password"
-        register={register}
-        error={errors.password?.message}
-      />
-      <Input
-        label="パスワード確認"
-        name="confirmPassword"
-        type="password"
-        register={register}
-        error={errors.confirmPassword?.message}
-      />
-      <Input
-        label="メール"
-        name="email"
-        type="email"
-        register={register}
-        error={errors.email?.message}
-      />
-      <button type="submit">登録</button>
+      <Stack spacing={3} sx={{ maxWidth: "20rem" }}>
+        <Input
+          error={!!errors.username?.message}
+          label="ユーザー名"
+          name="username"
+          register={register}
+          helperText={errors.username?.message}
+        />
+        <Input
+          error={!!errors.password?.message}
+          label="パスワード"
+          name="password"
+          type="password"
+          register={register}
+          helperText={errors.password?.message}
+        />
+        <Input
+          error={!!errors.confirmPassword?.message}
+          label="パスワード確認"
+          name="confirmPassword"
+          type="password"
+          register={register}
+          helperText={errors.confirmPassword?.message}
+        />
+        <Input
+          error={!!errors.email?.message}
+          label="メール"
+          name="email"
+          type="email"
+          register={register}
+          helperText={errors.email?.message}
+        />
+        <Button type="submit" variant="contained">
+          送信
+        </Button>
+      </Stack>
     </form>
   );
 };
